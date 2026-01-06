@@ -67,6 +67,7 @@
 
 @push('css')
     <link rel="stylesheet" href="{{ asset('bower_components/datedropper/css/datedropper.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('bower_components/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}">
     <style>
         .table-responsive {
             overflow-x: auto;
@@ -105,14 +106,36 @@
         table.dataTable.no-footer {
             border-bottom: 1px solid #f3f4f6;
         }
+        
+        /* Responsive Details Styling */
+        table.dataTable.dtr-inline.collapsed>tbody>tr>td.dtr-control:before, 
+        table.dataTable.dtr-inline.collapsed>tbody>tr>th.dtr-control:before {
+            background-color: #4c3f91;
+            border: none;
+            box-shadow: none;
+        }
+        table.dataTable>tbody>tr.child ul.dtr-details {
+            display: block;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+        table.dataTable>tbody>tr.child span.dtr-title {
+            display: inline-block;
+            min-width: 75px;
+            font-weight: bold;
+        }
     </style>
 @endpush
 
 @push('js')
     <script src="{{ asset('bower_components/datedropper/js/datedropper.min.js') }}"></script>
+    <script src="{{ asset('bower_components/datatables.net-responsive/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('bower_components/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js') }}"></script>
     <script>
         $(document).ready(function () {
             $('#order-table').DataTable({
+                responsive: true,
                 language: {
                     search: "_INPUT_",
                     searchPlaceholder: "Cari pesan...",
