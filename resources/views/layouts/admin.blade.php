@@ -13,7 +13,8 @@
 </head>
 
 <body class="bg-siakad-bg">
-    <div id="app" class="flex min-h-screen" x-data="{ sidebarOpen: false, openDropdown: null }">
+    <div id="app" class="flex min-h-screen"
+        x-data="{ sidebarOpen: false, openDropdown: null, mobileSearchOpen: false }">
         {{-- [ Sidebar ] start --}}
         @include('components._sidebar')
 

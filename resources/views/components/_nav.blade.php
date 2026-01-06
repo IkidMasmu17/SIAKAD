@@ -12,6 +12,23 @@
     </div>
 
     <div class="flex items-center space-x-6">
+        {{-- Mobile Search Toggle --}}
+        <button @click="mobileSearchOpen = !mobileSearchOpen"
+            class="md:hidden p-2 text-gray-400 hover:text-siakad-purple hover:bg-siakad-bg rounded-xl transition-all">
+            <i class="feather icon-search text-xl"></i>
+        </button>
+
+        {{-- Mobile Search Overlay --}}
+        <div x-show="mobileSearchOpen" @click.away="mobileSearchOpen = false" x-cloak x-transition
+            class="absolute top-0 left-0 w-full h-full bg-white z-50 flex items-center px-4 md:hidden border-b border-gray-100">
+            <i class="feather icon-search text-gray-400 mr-3"></i>
+            <input type="text" placeholder="Cari sesuatu..."
+                class="w-full bg-transparent border-none focus:ring-0 text-siakad-purple text-base">
+            <button @click="mobileSearchOpen = false" class="ml-3 text-gray-400 hover:text-red-500">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
         {{-- Search --}}
         <div
             class="hidden md:flex items-center bg-siakad-bg px-4 py-2 rounded-xl group transition-all duration-300 focus-within:ring-2 focus-within:ring-siakad-purple/20">
