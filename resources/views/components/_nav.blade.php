@@ -1,5 +1,5 @@
 <header
-    class="h-20 bg-white border-b border-gray-100 flex items-center justify-between px-8 sticky top-0 z-30 shadow-sm">
+    class="h-20 bg-white border-b border-gray-100 flex items-center justify-between px-4 md:px-8 sticky top-0 z-30 shadow-sm">
     <div class="flex items-center space-x-4">
         <button @click="sidebarOpen = !sidebarOpen"
             class="md:hidden text-siakad-purple p-2 hover:bg-siakad-bg rounded-lg transition-colors">
@@ -11,7 +11,7 @@
         </div>
     </div>
 
-    <div class="flex items-center space-x-6">
+    <div class="flex items-center space-x-2 md:space-x-6">
         {{-- Mobile Search Toggle --}}
         <button @click="mobileSearchOpen = !mobileSearchOpen"
             class="md:hidden p-2 text-gray-400 hover:text-siakad-purple hover:bg-siakad-bg rounded-xl transition-all">
@@ -72,7 +72,7 @@
         </div>
 
         {{-- Profile --}}
-        <div class="flex items-center space-x-4 pl-6 border-l border-gray-100 relative">
+        <div class="flex items-center space-x-4 pl-2 md:pl-6 border-l border-gray-100 relative">
             <div class="text-right hidden sm:block leading-tight">
                 <p class="text-sm font-bold text-siakad-purple">{{ Auth::user()->name }}</p>
                 <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest">
