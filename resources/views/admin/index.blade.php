@@ -87,7 +87,7 @@
 
         {{-- Chart and Secondary Stats --}}
         <div class="grid grid-cols-1 xl:grid-cols-3 gap-8">
-            <div class="xl:col-span-2 bg-white p-5 md:p-8 rounded-3xl shadow-sm border border-gray-50">
+            <div class="hidden md:block xl:col-span-2 bg-white p-5 md:p-8 rounded-3xl shadow-sm border border-gray-50">
                 <div class="flex items-center justify-between mb-8">
                     <div>
                         <h3 class="text-xl font-bold text-siakad-purple leading-tight">Grafik Analitik</h3>
@@ -147,7 +147,7 @@
         </div>
 
         {{-- Schools Table --}}
-        <div class="bg-white rounded-3xl shadow-sm border border-gray-50 overflow-hidden">
+        <div class="hidden md:block bg-white rounded-3xl shadow-sm border border-gray-50 overflow-hidden">
             <div
                 class="p-5 md:p-8 border-b border-gray-50 flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
                 <div>
