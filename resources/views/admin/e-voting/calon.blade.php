@@ -1,213 +1,302 @@
 @extends('layouts.admin')
 
-{{-- config 1 --}}
 @section('title', 'E-Voting | Calon')
-@section('title-2', 'Calon')
-@section('title-3', 'Calon')
 
-@section('describ')
-    Ini adalah halaman calon untuk admin
-@endsection
-
-@section('icon-l', 'icon-people')
-@section('icon-r', 'icon-home')
-
-@section('link')
-    {{ route('admin.e-voting.calon') }}
-@endsection
-
-{{-- main content --}}
 @section('content')
-    <div class="row">
-        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <div class="card-block">
-                        <form id="form-calon-kandidat">
-                            @csrf
-                            <div class="row">
-                                <div class="col-xl-12">
-                                    <div class="form-group">
-                                        <label for="nama_calon">Nama Calon</label>
-                                        <input type="text" name="nama_calon" id="nama_calon" class="form-control form-control-sm" placeholder="Nama Calon">
-                                        <input type="hidden" name="user_id" id="user_id" class="form-control form-control-sm" value="{{ $tes = Auth::id() }}">
+    <div class="space-y-6">
+        <!-- Form Card (Top) -->
+        <div class="w-full">
+            <div class="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden animate-fade-in-down">
+                <div class="p-6 border-b border-gray-50 flex items-center justify-between bg-siakad-bg/30">
+                    <h3 class="text-lg font-bold text-siakad-purple"><i
+                            class="fas fa-user-plus mr-2 text-siakad-purple"></i> <span id="form-title">Tambah Calon
+                            Kandidat</span></h3>
+                </div>
+                <div class="p-8">
+                    <form id="form-calon-kandidat">
+                        @csrf
+                        <div class="flex flex-col md:flex-row items-end gap-6">
+                            <div class="flex-1 w-full">
+                                <label for="nama_calon"
+                                    class="block text-xs font-bold text-gray-700 uppercase tracking-widest mb-2 ml-1">Nama
+                                    Calon</label>
+                                <div class="relative group">
+                                    <div
+                                        class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400 group-focus-within:text-siakad-purple transition-colors">
+                                        <i class="fas fa-user text-sm"></i>
                                     </div>
+                                    <input type="text" name="nama_calon" id="nama_calon" required
+                                        class="block w-full pl-11 pr-4 py-3 bg-siakad-bg/50 border border-gray-100 text-gray-900 text-sm rounded-xl focus:ring-2 focus:ring-siakad-purple focus:border-siakad-purple transition-all outline-none"
+                                        placeholder="Contoh: Andi Wijaya">
+                                    <input type="hidden" name="user_id" id="user_id" value="{{ Auth::id() }}">
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col">
-                                    <input type="hidden" name="hidden_id" id="hidden_id">
-                                    <input type="hidden" id="action" val="add">
-                                    <input type="submit" class="btn btn-sm btn-outline-success" value="Simpan" id="btn">
-                                    <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Batal</button>
-                                </div>
+
+                            <div class="flex items-center space-x-3 w-full md:w-auto">
+                                <input type="hidden" name="hidden_id" id="hidden_id">
+                                <input type="hidden" id="action" value="add">
+
+                                <button type="submit" id="btn"
+                                    class="flex-1 md:flex-none py-3 px-10 bg-siakad-purple hover:bg-indigo-800 text-white font-bold rounded-xl shadow-lg shadow-indigo-100 transition-all transform hover:-translate-y-0.5 active:translate-y-0">
+                                    <span>Simpan</span>
+                                </button>
+
+                                <button type="button" id="btn-cancel"
+                                    class="py-3 px-8 bg-gray-50 text-gray-500 font-bold rounded-xl hover:bg-gray-100 transition-all">
+                                    Batal
+                                </button>
                             </div>
-                        </form>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table Card (Bottom) -->
+        <div class="w-full">
+            <div class="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden animate-fade-in">
+                <div class="p-6 border-b border-gray-50 flex items-center justify-between bg-siakad-bg/30">
+                    <h3 class="text-lg font-bold text-siakad-purple"><i class="fas fa-users mr-2 text-siakad-purple"></i>
+                        Daftar Calon Kandidat</h3>
+                </div>
+                <div class="p-8">
+                    <div class="dt-responsive">
+                        <table id="order-table" class="w-full text-sm text-left border-collapse">
+                            <thead>
+                                <tr
+                                    class="text-xs font-bold text-gray-500 uppercase tracking-widest border-b border-gray-50">
+                                    <th class="px-4 py-4 w-20">No</th>
+                                    <th class="px-4 py-4">Nama Calon</th>
+                                    <th class="px-4 py-4 w-32">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-50">
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <div class="card-block">
-                        <div class="dt-responsive table-responsive">
-                            <table id="order-table" class="table table-striped table-bordered nowrap shadow-sm">
-                                <thead class="text-left">
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Nama Calon</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="text-left">
-                                    
-                                </tbody>
-                            </table>
+    </div>
+
+    {{-- Modern Confirmation Modal --}}
+    <div id="confirmModal" class="fixed inset-0 z-50 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog"
+        aria-modal="true">
+        <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"
+                onclick="$('#confirmModal').addClass('hidden')"></div>
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+            <div
+                class="inline-block align-middle bg-white rounded-3xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                    <div class="sm:flex sm:items-start">
+                        <div
+                            class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+                            <i class="fas fa-exclamation-triangle text-red-600"></i>
+                        </div>
+                        <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                            <h3 class="text-lg leading-6 font-bold text-gray-900" id="modal-title">Konfirmasi Hapus</h3>
+                            <div class="mt-2">
+                                <p class="text-sm text-gray-500">Apakah Anda yakin ingin menghapus calon ini? Tindakan ini
+                                    tidak dapat dibatalkan.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="confirmModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4>Konfirmasi</h4>
-                </div>
-                <div class="modal-body">
-                    <h5 align="center" id="confirm">Apakah anda yakin ingin menghapus data ini?</h5>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" name="ok_button" id="ok_button" class="btn btn-sm btn-outline-danger">Hapus</button>
-                    <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Batal</button>
+                <div
+                    class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse space-y-2 sm:space-y-0 sm:space-x-2 sm:space-x-reverse">
+                    <button type="button" id="ok_button"
+                        class="w-full inline-flex justify-center rounded-xl border border-transparent shadow-sm px-4 py-2.5 bg-red-600 text-base font-bold text-white hover:bg-red-700 focus:outline-none sm:w-auto sm:text-sm transition-all">
+                        Hapus Data
+                    </button>
+                    <button type="button"
+                        class="w-full inline-flex justify-center rounded-xl border border-gray-300 shadow-sm px-4 py-2.5 bg-white text-base font-bold text-gray-700 hover:bg-gray-50 focus:outline-none sm:w-auto sm:text-sm transition-all"
+                        onclick="$('#confirmModal').addClass('hidden')">
+                        Batal
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 @endsection
 
-{{-- addons css --}}
 @push('css')
-    <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/pages/data-table/css/buttons.dataTables.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}">
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset('bower_components/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/toastr.css') }}">
     <style>
-        .btn i {
-            margin-right: 0px;
+        /* Custom DataTable Styling to match Tailwind */
+        .dataTables_wrapper .dataTables_length select,
+        .dataTables_wrapper .dataTables_filter input {
+            @apply px-4 py-2 bg-siakad-bg/50 border border-gray-100 rounded-xl text-sm outline-none focus:ring-2 focus:ring-siakad-purple focus:border-siakad-purple transition-all;
+        }
+
+        .dataTables_wrapper .dataTables_paginate .paginate_button {
+            @apply rounded-xl border-none font-bold text-xs px-3 py-2 transition-all !important;
+        }
+
+        /* Fix Oversized Sorting Icons in DataTables */
+        table.dataTable thead .sorting:before,
+        table.dataTable thead .sorting:after,
+        table.dataTable thead .sorting_asc:before,
+        table.dataTable thead .sorting_asc:after,
+        table.dataTable thead .sorting_desc:before,
+        table.dataTable thead .sorting_desc:after {
+            font-size: 0.8rem !important;
+            bottom: 0.9em !important;
+            opacity: 0.3;
+        }
+
+        table.dataTable thead .sorting_asc:before,
+        table.dataTable thead .sorting_desc:after {
+            opacity: 1 !important;
+            color: #4c3f91 !important;
+        }
+
+        .dataTables_wrapper .dataTables_info {
+            @apply text-xs text-gray-400 font-medium pt-4;
+        }
+
+        table.dataTable thead th {
+            @apply border-b border-gray-50 !important;
+        }
+
+        table.dataTable.no-footer {
+            @apply border-b-0 !important;
+        }
+
+        .dataTables_filter {
+            @apply mb-6;
+        }
+
+        .modal-backdrop {
+            display: none !important;
         }
     </style>
 @endpush
 
-{{-- addons js --}}
 @push('js')
     <script src="{{ asset('bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('bower_components/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('bower_components/datatables.net-responsive/js/dataTables.responsive.min.js') }}"></script>
-    <script src="{{ asset('bower_components/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js') }}"></script>
     <script>
         $(document).ready(function () {
-            $('#order-table').DataTable({
+            var table = $('#order-table').DataTable({
                 processing: true,
                 serverSide: true,
                 ajax: {
                     url: "{{ route('admin.e-voting.calon') }}",
                 },
                 columns: [
-                {
-                    data: 'DT_RowIndex',
-                    name: 'DT_RowIndex'
+                    { data: 'DT_RowIndex', name: 'DT_RowIndex', className: 'px-6 py-5 font-medium text-gray-900 w-20', orderable: false },
+                    { data: 'name', name: 'name', className: 'px-6 py-5 text-gray-600 font-medium' },
+                    { data: 'action', name: 'action', orderable: false, searchable: false, className: 'px-6 py-5 w-32' }
+                ],
+                order: [],
+                language: {
+                    search: "_INPUT_",
+                    searchPlaceholder: "Cari calon...",
+                    lengthMenu: "Tampilkan _MENU_",
+                    info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
+                    paginate: {
+                        first: '<i class="fas fa-angle-double-left"></i>',
+                        last: '<i class="fas fa-angle-double-right"></i>',
+                        previous: '<i class="fas fa-angle-left"></i>',
+                        next: '<i class="fas fa-angle-right"></i>'
+                    },
+                    emptyTable: "Belum ada data calon tersedia",
+                    zeroRecords: "Data calon tidak ditemukan"
                 },
-                {
-                    data: 'name',
-                    name: 'name'
-                },
-                {
-                    data: 'action',
-                    name: 'action'
+                drawCallback: function () {
+                    $('.dataTables_paginate > .paginate_button').addClass('px-3 py-2');
                 }
-                ]
             });
 
+            // Form Handling
             $('#form-calon-kandidat').on('submit', function (event) {
                 event.preventDefault();
-
-                var url = '';
-                if ($('#nama_calon').val() == 'add') {
-                    url = "{{ route('admin.e-voting.calon') }}";
-                }
-
-                if ($('#action').val() == 'edit') {
-                    url = "{{ route('admin.e-voting.calon-update') }}";
-                }
+                var action = $('#action').val();
+                var url = (action === 'add') ? "{{ route('admin.e-voting.calon') }}" : "{{ route('admin.e-voting.calon-update') }}";
 
                 $.ajax({
                     url: url,
                     method: 'POST',
                     dataType: 'JSON',
                     data: $(this).serialize(),
+                    beforeSend: function () {
+                        $('#btn').addClass('opacity-50 pointer-events-none').find('span').text('Memproses...');
+                    },
                     success: function (data) {
-                        var html = ''
+                        $('#btn').removeClass('opacity-50 pointer-events-none').find('span').text(action === 'add' ? 'Simpan' : 'Update');
+
                         if (data.errors) {
-                            html = data.errors[0];
-                            $('#nama_calon').addClass('is-invalid');
-                            toastr.error(html);
+                            toastr.error(data.errors[0]);
+                            $('#nama_calon').addClass('ring-2 ring-red-500');
                         }
 
                         if (data.success) {
-                            toastr.success('Sukses!');
-                            $('#nama_calon').removeClass('is-invalid');
-                            $('#form-calon-kandidat')[0].reset();
-                            $('#action').val('add');
-                            $('#btn')
-                                .removeClass('btn-outline-info')
-                                .addClass('btn-outline-success')
-                                .val('Simpan');
-                            $('#order-table').DataTable().ajax.reload();
+                            toastr.success(data.success);
+                            resetForm();
+                            table.ajax.reload();
                         }
-                        $('#form_result').html(html);
+                    },
+                    error: function () {
+                        $('#btn').removeClass('opacity-50 pointer-events-none').find('span').text(action === 'add' ? 'Simpan' : 'Update');
+                        toastr.error('Terjadi kesalahan pada server');
                     }
                 });
             });
 
             $(document).on('click', '.edit', function () {
                 var id = $(this).attr('id');
+                $(this).addClass('opacity-50 pointer-events-none');
                 $.ajax({
-                    url: '/admin/e-voting/calon/'+id,
+                    url: '/admin/e-voting/calon/' + id,
                     dataType: 'JSON',
                     success: function (data) {
-                        $('#nama_calon').val(data.nama_calon.name);
+                        $('.edit').removeClass('opacity-50 pointer-events-none');
+                        $('#nama_calon').val(data.nama_calon.name).focus();
                         $('#hidden_id').val(data.nama_calon.id);
                         $('#action').val('edit');
-                        $('#btn')
-                            .removeClass('btn-outline-success')
-                            .addClass('btn-outline-info')
-                            .val('Update');
+                        $('#form-title').text('Edit Calon Kandidat');
+                        $('#btn').removeClass('bg-siakad-purple').addClass('bg-siakad-light-purple').find('span').text('Update');
+
+                        $('html, body').animate({ scrollTop: 0 }, 500);
                     }
                 });
             });
 
-            var user_id;
+            $('#btn-cancel').on('click', function () {
+                resetForm();
+            });
+
+            function resetForm() {
+                $('#form-calon-kandidat')[0].reset();
+                $('#nama_calon').removeClass('ring-2 ring-red-500');
+                $('#action').val('add');
+                $('#hidden_id').val('');
+                $('#form-title').text('Tambah Calon Kandidat');
+                $('#btn').removeClass('bg-siakad-light-purple').addClass('bg-siakad-purple').find('span').text('Simpan');
+            }
+
+            var del_id;
             $(document).on('click', '.delete', function () {
-                user_id = $(this).attr('id');
-                $('#ok_button').text('Hapus');
-                $('#confirmModal').modal('show');
+                del_id = $(this).attr('id');
+                $('#confirmModal').removeClass('hidden');
             });
 
             $('#ok_button').click(function () {
                 $.ajax({
-                    url: '/admin/e-voting/calon/hapus/'+user_id,
+                    url: '/admin/e-voting/calon/hapus/' + del_id,
                     beforeSend: function () {
-                        $('#ok_button').text('Menghapus...');
-                    }, success: function (data) {
+                        $('#ok_button').text('Menghapus...').addClass('opacity-50 pointer-events-none');
+                    },
+                    success: function (data) {
                         setTimeout(function () {
-                            $('#confirmModal').modal('hide');
-                            $('#order-table').DataTable().ajax.reload();
+                            $('#confirmModal').addClass('hidden');
+                            $('#ok_button').text('Hapus Data').removeClass('opacity-50 pointer-events-none');
+                            table.ajax.reload();
                             toastr.success('Data berhasil dihapus');
-                        }, 1000);
+                        }, 500);
                     }
                 });
             });

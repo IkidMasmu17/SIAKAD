@@ -1,113 +1,135 @@
 @extends('layouts.admin')
 
-{{-- config 1 --}}
 @section('title', 'Referensi | Bagian Pegawai')
-@section('title-2', 'Bagian Pegawai')
-@section('title-3', 'Bagian Pegawai')
 
-@section('describ')
-    Ini adalah halaman bagian pegawai untuk admin
-@endsection
-
-@section('icon-l', 'fa fa-list-alt')
-@section('icon-r', 'icon-home')
-
-@section('link')
-    {{ route('admin.referensi.bagian-pegawai') }}
-@endsection
-
-{{-- main content --}}
 @section('content')
-    <div class="row">
-        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <div class="card-block">
-                        <form id="form-pegawai">
-                            @csrf
-                            <div class="row">
-                                <div class="col-xl-12">
-                                    <div class="form-group">
-                                        <label for="pegawai">Bagian Pegawai</label>
-                                        <input type="text" name="pegawai" id="pegawai" class="form-control form-control-sm" placeholder="Bagian Pegawai">
-                                        <span id="form_result" class="text-danger"></span>
+    <div class="space-y-6">
+        <!-- Form Card (Top) -->
+        <div class="w-full">
+            <div class="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden animate-fade-in-down">
+                <div class="p-6 border-b border-gray-50 flex items-center justify-between bg-siakad-bg/30">
+                    <h3 class="text-lg font-bold text-siakad-purple"><i
+                            class="fas fa-id-card-alt mr-2 text-siakad-purple"></i> Form Bagian Pegawai</h3>
+                    <div class="flex items-center space-x-2">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                        <span class="text-xs font-medium text-gray-500 uppercase tracking-wider">Input Mode</span>
+                    </div>
+                </div>
+                <div class="p-8">
+                    <form id="form-pegawai">
+                        @csrf
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                            <!-- Bagian Pegawai Input -->
+                            <div class="space-y-2">
+                                <label for="pegawai"
+                                    class="block text-xs font-bold text-gray-700 uppercase tracking-widest ml-1">Nama Bagian
+                                    / Jabatan</label>
+                                <div class="relative group">
+                                    <div
+                                        class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400 group-focus-within:text-siakad-purple transition-colors">
+                                        <i class="fas fa-briefcase text-xs"></i>
                                     </div>
+                                    <input type="text" name="pegawai" id="pegawai"
+                                        class="block w-full pl-11 pr-4 py-3 bg-siakad-bg/50 border border-gray-100 text-gray-900 text-sm rounded-xl focus:ring-2 focus:ring-siakad-purple focus:border-siakad-purple transition-all outline-none"
+                                        placeholder="Contoh: Tata Usaha, Staff IT, dll.">
                                 </div>
+                                <span id="form_result" class="text-xs text-red-500 font-medium ml-1"></span>
                             </div>
-                            <div class="row">
-                                <div class="col">
-                                    <input type="hidden" name="hidden_id" id="hidden_id">
-                                    <input type="hidden" id="action" val="add">
-                                    <input type="submit" class="btn btn-sm btn-outline-success" value="Simpan" id="btn">
-                                    <button type="reset" class="btn btn-sm btn-danger">Batal</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <div class="card-block">
-                        <div class="dt-responsive table-responsive">
-                            <table id="order-table" class="table table-striped table-bordered nowrap shadow-sm">
-                                <thead class="text-left">
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Bagian Pegawai</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="text-left">
-
-                                </tbody>
-                            </table>
                         </div>
-                    </div>
+
+                        <div class="flex items-center space-x-3 pt-6 border-t border-gray-50 mt-6">
+                            <input type="hidden" name="hidden_id" id="hidden_id">
+                            <input type="hidden" id="action" val="add">
+                            <button type="submit" id="btn"
+                                class="flex-1 md:flex-none py-3 px-10 bg-siakad-purple hover:bg-indigo-800 text-white font-bold rounded-xl shadow-lg shadow-indigo-100 transition-all transform hover:-translate-y-0.5 active:translate-y-0">
+                                Simpan Data
+                            </button>
+                            <button type="reset"
+                                class="py-3 px-8 bg-gray-50 text-gray-500 font-bold rounded-xl hover:bg-gray-100 transition-all">
+                                Batal
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div id="confirmModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4>Konfirmasi</h4>
+        <!-- Table Card (Bottom) -->
+        <div class="w-full">
+            <div class="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden animate-fade-in-up">
+                <div class="p-6 border-b border-gray-50 flex items-center justify-between bg-siakad-bg/30">
+                    <h3 class="text-lg font-bold text-siakad-purple"><i class="fas fa-list-alt mr-2 text-siakad-purple"></i>
+                        Data Bagian Pegawai</h3>
                 </div>
-                <div class="modal-body">
-                    <h5 align="center" id="confirm">Apakah anda yakin ingin menghapus data ini?</h5>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" name="ok_button" id="ok_button" class="btn btn-sm btn-outline-danger">Hapus</button>
-                    <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Batal</button>
+                <div class="p-0">
+                    <div class="table-responsive">
+                        <table id="order-table" class="w-full text-sm text-left text-gray-500">
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-50/50">
+                                <tr>
+                                    <th scope="col" class="px-6 py-4 font-bold text-siakad-purple tracking-wider">No</th>
+                                    <th scope="col" class="px-6 py-4 font-bold text-siakad-purple tracking-wider">Nama
+                                        Bagian</th>
+                                    <th scope="col"
+                                        class="px-6 py-4 font-bold text-siakad-purple tracking-wider text-center"
+                                        style="width: 15%">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-100">
+                                <!-- DataTables will populate this -->
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 @endsection
 
-{{-- addons css --}}
 @push('css')
-    <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/pages/data-table/css/buttons.dataTables.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/toastr.css') }}">
     <style>
-        .btn i {
-            margin-right: 0px;
+        .table-responsive {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* DataTables Customization for Tailwind */
+        .dataTables_wrapper .dataTables_length select {
+            padding-right: 2.5rem;
+            border-radius: 0.75rem;
+            border-color: #f3f4f6;
+            font-size: 0.875rem;
+        }
+
+        .dataTables_wrapper .dataTables_filter input {
+            border-radius: 0.75rem;
+            border-color: #f3f4f6;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+        }
+
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+            background: #4c3f91 !important;
+            color: white !important;
+            border: none;
+            border-radius: 0.5rem;
+        }
+
+        .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+            background: #e0e7ff !important;
+            color: #4c3f91 !important;
+            border: none;
+            border-radius: 0.5rem;
+        }
+
+        table.dataTable.no-footer {
+            border-bottom: 1px solid #f3f4f6;
         }
     </style>
 @endpush
 
-{{-- addons js --}}
 @push('js')
-    <script src="{{ asset('bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('bower_components/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('bower_components/datatables.net-responsive/js/dataTables.responsive.min.js') }}"></script>
-    <script src="{{ asset('bower_components/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('js/sweetalert2.min.js') }}"></script>
     <script>
         $(document).ready(function () {
             $('#order-table').DataTable({
@@ -117,19 +139,26 @@
                     url: "{{ route('admin.referensi.bagian-pegawai') }}",
                 },
                 columns: [
-                {
-                    data: 'DT_RowIndex',
-                    name: 'DT_RowIndex'
+                    { data: 'DT_RowIndex', name: 'DT_RowIndex', class: 'px-6 py-4 align-middle font-medium text-gray-900' },
+                    { data: 'name', name: 'name', class: 'px-6 py-4 align-middle text-gray-700' },
+                    { data: 'action', name: 'action', class: 'px-6 py-4 align-middle text-center', orderable: false, searchable: false }
+                ],
+                language: {
+                    search: "_INPUT_",
+                    searchPlaceholder: "Cari data...",
+                    lengthMenu: "Tampilkan _MENU_ data",
+                    paginate: {
+                        first: '<i class="fas fa-angle-double-left"></i>',
+                        last: '<i class="fas fa-angle-double-right"></i>',
+                        previous: '<i class="fas fa-angle-left"></i>',
+                        next: '<i class="fas fa-angle-right"></i>'
+                    }
                 },
-                {
-                    data: 'name',
-                    name: 'name'
-                },
-                {
-                    data: 'action',
-                    name: 'action'
+                dom: '<"flex flex-col md:flex-row justify-between items-center p-6 space-y-4 md:space-y-0"lf>rt<"flex flex-col md:flex-row justify-between items-center p-6 border-t border-gray-50"ip>',
+                drawCallback: function () {
+                    $('select').addClass('bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-siakad-purple focus:border-siakad-purple block w-full p-2.5');
+                    $('input[type="search"]').addClass('bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-siakad-purple focus:border-siakad-purple block w-full p-2.5');
                 }
-                ]
             });
 
             $('#form-pegawai').on('submit', function (event) {
@@ -138,12 +167,10 @@
 
                 if ($('#action').val() == 'add') {
                     url = "{{ route('admin.referensi.bagian-pegawai') }}";
-                    text = "Data sukses ditambahkan";
                 }
 
                 if ($('#action').val() == 'edit') {
                     url = "{{ route('admin.referensi.bagian-pegawai-update') }}";
-                    text = "Data sukses diupdate";
                 }
 
                 $.ajax({
@@ -154,22 +181,18 @@
                     success: function (data) {
                         var html = '';
                         if (data.errors) {
-                            // for (var count = 0; count <= data.errors.length; count++) {
                             html = data.errors[0];
-                            // }
-                            $('#pegawai').addClass('is-invalid');
+                            $('#pegawai').addClass('border-red-500 focus:ring-red-500 focus:border-red-500');
                             toastr.error(html);
                         }
 
                         if (data.success) {
-                            toastr.success('Data sukses ditambahkan');
-                            $('#pegawai').removeClass('is-invalid');
+                            toastr.success('Data berhasil disimpan!');
+                            $('#pegawai').removeClass('border-red-500 focus:ring-red-500 focus:border-red-500');
                             $('#form-pegawai')[0].reset();
                             $('#action').val('add');
-                            $('#btn')
-                                .removeClass('btn-outline-info')
-                                .addClass('btn-outline-success')
-                                .val('Simpan');
+                            $('#hidden_id').val('');
+                            $('#btn').html('Simpan Data');
                             $('#order-table').DataTable().ajax.reload();
                         }
                         $('#form_result').html(html);
@@ -180,17 +203,13 @@
             $(document).on('click', '.edit', function () {
                 var id = $(this).attr('id');
                 $.ajax({
-                    url: '/admin/referensi/bagian-pegawai/'+id,
+                    url: '/admin/referensi/bagian-pegawai/' + id,
                     dataType: 'JSON',
                     success: function (data) {
-                        console.log(data.pegawai);
                         $('#pegawai').val(data.pegawai.name);
                         $('#hidden_id').val(data.pegawai.id);
                         $('#action').val('edit');
-                        $('#btn')
-                            .removeClass('btn-outline-success')
-                            .addClass('btn-outline-info')
-                            .val('Update');
+                        $('#btn').html('Update Data');
                     }
                 });
             });
@@ -198,23 +217,32 @@
             var user_id;
             $(document).on('click', '.delete', function () {
                 user_id = $(this).attr('id');
-                $('#ok_button').text('Hapus');
-                $('#confirmModal').modal('show');
-            });
-
-            $('#ok_button').click(function () {
-                $.ajax({
-                    url: '/admin/referensi/bagian-pegawai/hapus/'+user_id,
-                    beforeSend: function () {
-                        $('#ok_button').text('Menghapus...');
-                    }, success: function (data) {
-                        setTimeout(function () {
-                            $('#confirmModal').modal('hide');
-                            $('#order-table').DataTable().ajax.reload();
-                            toastr.success('Data berhasil dihapus');
-                        }, 1000);
+                Swal.fire({
+                    title: 'Konfirmasi Hapus',
+                    text: "Data yang dihapus tidak dapat dikembalikan!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#4c3f91',
+                    confirmButtonText: 'Ya, Hapus!',
+                    cancelButtonText: 'Batal',
+                    customClass: {
+                        popup: 'rounded-3xl',
+                        confirmButton: 'rounded-xl px-6 py-2.5 font-bold',
+                        cancelButton: 'rounded-xl px-6 py-2.5 font-bold'
                     }
-                });
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: '/admin/referensi/bagian-pegawai/hapus/' + user_id,
+                            beforeSend: function () {
+                            }, success: function (data) {
+                                toastr.success('Data berhasil dihapus');
+                                $('#order-table').DataTable().ajax.reload();
+                            }
+                        });
+                    }
+                })
             });
         });
     </script>

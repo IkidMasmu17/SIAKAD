@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin\EVoting;
 
-use Validator;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
@@ -13,14 +13,15 @@ use App\User;
 
 class PemilihanController extends Controller
 {
-    public function index(Request $request) {
+    public function index(Request $request)
+    {
         if ($request->ajax()) {
             $data = Pemilihan::latest()->get();
             return DataTables::of($data)
                 ->addColumn('action', function ($data) {
-                    $button = '<button type="button" id="'.$data->id.'" class="edit btn btn-mini btn-info shadow-sm">Edit</button>';
-                    $button .= '&nbsp;&nbsp;&nbsp;<button type="button" id="'.$data->id.'" class="delete btn btn-mini btn-danger shadow-sm">Delete</button>';
-                    return $button;
+                    $button = '<button type="button" id="' . $data->id . '" class="edit flex items-center px-3 py-1.5 bg-indigo-50 text-siakad-purple rounded-xl hover:bg-siakad-purple hover:text-white transition-all duration-200 font-bold text-xs"><i class="fas fa-edit mr-1.5"></i> Edit</button>';
+                    $button .= '&nbsp;&nbsp;<button type="button" id="' . $data->id . '" class="delete flex items-center px-3 py-1.5 bg-red-50 text-red-500 rounded-xl hover:bg-red-500 hover:text-white transition-all duration-200 font-bold text-xs"><i class="fas fa-trash-alt mr-1.5"></i> Hapus</button>';
+                    return '<div class="flex items-center space-x-2">' . $button . '</div>';
                 })
                 ->rawColumns(['action'])
                 ->addIndexColumn()
@@ -33,11 +34,12 @@ class PemilihanController extends Controller
 
 
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $data = $request->all();
         // validasi
         $rules = [
-            'nama_calon'  => 'required|max:50',
+            'nama_calon' => 'required|max:50',
         ];
 
         $message = [
@@ -60,13 +62,13 @@ class PemilihanController extends Controller
             $newTglMulai = $tglMulai[2] . "-" . $tglMulai[1] . "-" . $tglMulai[0];
             $newTglSelesai = $tglSelesai[2] . "-" . $tglSelesai[1] . "-" . $tglSelesai[0];
             Pemilihan::create([
-                'name'          => $nama_calon,
-                'posisi'        => $data['posisi'],
-                'start_date'    => $newTglMulai,
-                'end_date'      => $newTglSelesai
+                'name' => $nama_calon,
+                'posisi' => $data['posisi'],
+                'start_date' => $newTglMulai,
+                'end_date' => $newTglSelesai
             ]);
         }
-        
+
 
         return response()
             ->json([
@@ -74,22 +76,24 @@ class PemilihanController extends Controller
             ]);
     }
 
-    public function edit($id) {
+    public function edit($id)
+    {
         $data = Pemilihan::find($id);
         return response()
             ->json([
-                'name'          => $data['name'],
-                'posisi'        => $data['posisi'],
-                'start_date'    => $data['start_date'] ?? "",
-                'end_date'      => $data['end_date'] ?? "",
+                'name' => $data['name'],
+                'posisi' => $data['posisi'],
+                'start_date' => $data['start_date'] ?? "",
+                'end_date' => $data['end_date'] ?? "",
             ]);
     }
 
-    public function update(Request $request) {
+    public function update(Request $request)
+    {
         $data = $request->all();
         // validasi
         $rules = [
-            'nama_calon'  => 'required|max:50',
+            'nama_calon' => 'required|max:50',
         ];
 
         $message = [
@@ -111,10 +115,10 @@ class PemilihanController extends Controller
         $newTglSelesai = $tglSelesai[2] . "-" . $tglSelesai[1] . "-" . $tglSelesai[0];
 
         $status = Pemilihan::whereId($request->input('hidden_id'))->update([
-            'name'          => $request->input('nama_calon'),
-            'posisi'        => $request->input('posisi'),
-            'start_date'    => $newTglMulai,
-            'end_date'      => $newTglSelesai
+            'name' => $request->input('nama_calon'),
+            'posisi' => $request->input('posisi'),
+            'start_date' => $newTglMulai,
+            'end_date' => $newTglSelesai
         ]);
 
         return response()
@@ -123,7 +127,8 @@ class PemilihanController extends Controller
             ]);
     }
 
-    public function destroy($id) {
+    public function destroy($id)
+    {
         $sanksi = Pemilihan::find($id);
         $sanksi->delete();
     }

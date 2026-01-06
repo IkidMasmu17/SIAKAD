@@ -12,13 +12,14 @@ use Illuminate\Support\Facades\Auth;
 
 class StatusGuruController extends Controller
 {
-    public function index(Request $request) {
+    public function index(Request $request)
+    {
         if ($request->ajax()) {
             $data = StatusGuru::latest()->get();
             return DataTables::of($data)
                 ->addColumn('action', function ($data) {
-                    $button = '<button type="button" id="'.$data->id.'" class="edit btn btn-mini btn-info shadow-sm">Edit</button>';
-                    $button .= '&nbsp;&nbsp;&nbsp;<button type="button" id="'.$data->id.'" class="delete btn btn-mini btn-danger shadow-sm">Delete</button>';
+                    $button = '<button type="button" id="' . $data->id . '" class="edit btn btn-primary px-3 py-1 text-sm shadow-sm rounded-md mr-1"><i class="fas fa-edit"></i> Edit</button>';
+                    $button .= '<button type="button" id="' . $data->id . '" class="delete btn btn-danger px-3 py-1 text-sm shadow-sm rounded-md"><i class="fas fa-trash"></i> Hapus</button>';
                     return $button;
                 })
                 ->rawColumns(['action'])
@@ -29,10 +30,11 @@ class StatusGuruController extends Controller
         return view('admin.referensi.status-guru', ['mySekolah' => User::sekolah()]);
     }
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         // validasi
         $rules = [
-            'status_guru'  => 'required|max:100',
+            'status_guru' => 'required|max:100',
         ];
 
         $message = [
@@ -49,7 +51,7 @@ class StatusGuruController extends Controller
         }
 
         $status = StatusGuru::create([
-            'name'  => $request->input('status_guru'),
+            'name' => $request->input('status_guru'),
             'user_id' => Auth::id()
         ]);
 
@@ -59,19 +61,21 @@ class StatusGuruController extends Controller
             ]);
     }
 
-    public function edit($id) {
+    public function edit($id)
+    {
         $status = StatusGuru::find($id);
 
         return response()
             ->json([
-                'status'  => $status
+                'status' => $status
             ]);
     }
 
-    public function update(Request $request) {
+    public function update(Request $request)
+    {
         // validasi
         $rules = [
-            'status_guru'  => 'required|max:100',
+            'status_guru' => 'required|max:100',
         ];
 
         $message = [
@@ -88,7 +92,7 @@ class StatusGuruController extends Controller
         }
 
         $status = StatusGuru::whereId($request->input('hidden_id'))->update([
-            'name'  => $request->input('status_guru'),
+            'name' => $request->input('status_guru'),
         ]);
 
         return response()
@@ -97,7 +101,8 @@ class StatusGuruController extends Controller
             ]);
     }
 
-    public function destroy($id) {
+    public function destroy($id)
+    {
         $status = StatusGuru::find($id);
         $status->delete();
     }

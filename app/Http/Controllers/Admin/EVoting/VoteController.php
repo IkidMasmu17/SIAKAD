@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin\EVoting;
 
-use Validator;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
@@ -11,25 +11,26 @@ use App\Models\Admin\Voting;
 
 class VoteController extends Controller
 {
-    public function index(Request $request) {
-    	$names = Pemilihan::all();
-    	$no = 1;
+    public function index(Request $request)
+    {
+        $names = Pemilihan::all();
+        $no = 1;
         return view('admin.e-voting.vote', ['names' => $names, 'no' => $no, 'mySekolah' => User::sekolah()]);
-    } 
-     
-    public function store(Request $request) {
+    }
+
+    public function store(Request $request)
+    {
         // validasi
-        dd('ok');
         $rules = [
-            'calon_kandidat_id'  => 'required|max:50',
+            'calon_kandidat_id' => 'required|max:50',
         ];
 
         $message = [
             'calon_kandidat_id.required' => 'Kolom ini tidak boleh kosong',
         ];
 
-        $validator = Voting::make($request->all(), $rules, $message);
-        dd($request->all());
+        $validator = Validator::make($request->all(), $rules, $message);
+
         if ($validator->fails()) {
             return response()
                 ->json([
@@ -38,13 +39,13 @@ class VoteController extends Controller
         }
 
         $status = Voting::create([
-            'calon_kandidat_id'  => $request->input('calon_kandidat_id'),
-            'id_user'  => $request->input('id_user')
+            'calon_kandidat_id' => $request->input('calon_kandidat_id'),
+            'id_user' => auth()->id()
         ]);
 
         return response()
             ->json([
-                'success' => 'Data Added.',
+                'success' => 'Vote berhasil dikirim.',
             ]);
     }
 

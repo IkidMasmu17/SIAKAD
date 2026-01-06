@@ -17,8 +17,8 @@ class TingkatanKelasController extends Controller
             $data = TingkatanKelas::where('user_id', auth()->user()->id)->latest()->get();
             return DataTables::of($data)
                 ->addColumn('action', function ($data) {
-                    $button = '<button type="button" id="' . $data->id . '" class="edit btn btn-mini btn-info shadow-sm">Edit</button>';
-                    $button .= '&nbsp;&nbsp;&nbsp;<button type="button" id="' . $data->id . '" class="delete btn btn-mini btn-danger shadow-sm">Delete</button>';
+                    $button = '<button type="button" id="' . $data->id . '" class="edit btn btn-primary px-3 py-1 text-sm shadow-sm rounded-md mr-1"><i class="fas fa-edit"></i> Edit</button>';
+                    $button .= '<button type="button" id="' . $data->id . '" class="delete btn btn-danger px-3 py-1 text-sm shadow-sm rounded-md"><i class="fas fa-trash"></i> Hapus</button>';
                     return $button;
                 })
                 ->rawColumns(['action'])
@@ -32,7 +32,7 @@ class TingkatanKelasController extends Controller
     {
         // validasi
         $rules = [
-            'tingkat'  => 'required|max:50',
+            'tingkat' => 'required|max:50',
         ];
 
         $message = [
@@ -49,8 +49,7 @@ class TingkatanKelasController extends Controller
         }
 
         $status = TingkatanKelas::create([
-            'user_id' => auth()->user()->id,
-            'name'  => $request->input('tingkat'),
+            'name' => $request->input('tingkat'),
             'user_id' => $request->user()->id,
             'sekolah_id' => $request->user()->id_sekolah,
         ]);
@@ -67,7 +66,7 @@ class TingkatanKelasController extends Controller
 
         return response()
             ->json([
-                'tingkat'  => $tingkat
+                'tingkat' => $tingkat
             ]);
     }
 
@@ -75,7 +74,7 @@ class TingkatanKelasController extends Controller
     {
         // validasi
         $rules = [
-            'tingkat'  => 'required|max:50',
+            'tingkat' => 'required|max:50',
         ];
 
         $message = [
@@ -94,10 +93,10 @@ class TingkatanKelasController extends Controller
             ['id', $request->input('hidden_id')],
             ['user_id', auth()->user()->id]
         ])->update([
-            'name'  => $request->input('tingkat'),
-            'user_id' => $request->user()->id,
-            'sekolah_id' => $request->user()->id_sekolah,
-        ]);
+                    'name' => $request->input('tingkat'),
+                    'user_id' => $request->user()->id,
+                    'sekolah_id' => $request->user()->id_sekolah,
+                ]);
 
         return response()
             ->json([

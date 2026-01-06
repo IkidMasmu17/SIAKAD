@@ -12,13 +12,14 @@ use Illuminate\Support\Facades\Auth;
 
 class SemesterController extends Controller
 {
-    public function index(Request $request) {
+    public function index(Request $request)
+    {
         if ($request->ajax()) {
             $data = Semester::where('user_id', Auth::id())->latest()->get();
             return DataTables::of($data)
                 ->addColumn('action', function ($data) {
-                    $button = '<button type="button" id="'.$data->id.'" class="edit btn btn-mini btn-info shadow-sm">Edit</button>';
-                    $button .= '&nbsp;&nbsp;&nbsp;<button type="button" id="'.$data->id.'" class="delete btn btn-mini btn-danger shadow-sm">Delete</button>';
+                    $button = '<button type="button" id="' . $data->id . '" class="edit btn btn-primary px-3 py-1 text-sm shadow-sm rounded-md mr-1"><i class="fas fa-edit"></i> Edit</button>';
+                    $button .= '<button type="button" id="' . $data->id . '" class="delete btn btn-danger px-3 py-1 text-sm shadow-sm rounded-md"><i class="fas fa-trash"></i> Hapus</button>';
                     return $button;
                 })
                 ->rawColumns(['action'])
@@ -29,10 +30,11 @@ class SemesterController extends Controller
         return view('admin.referensi.semester', ['mySekolah' => User::sekolah()]);
     }
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         // validasi
         $rules = [
-            'semester'  => 'required|max:100',
+            'semester' => 'required|max:100',
         ];
 
         $message = [
@@ -49,7 +51,7 @@ class SemesterController extends Controller
         }
 
         $semester = Semester::create([
-            'name'  => $request->input('semester'),
+            'name' => $request->input('semester'),
             'user_id' => Auth::id()
         ]);
 
@@ -59,19 +61,21 @@ class SemesterController extends Controller
             ]);
     }
 
-    public function edit($id) {
+    public function edit($id)
+    {
         $semester = Semester::find($id);
 
         return response()
             ->json([
-                'semester'  => $semester
+                'semester' => $semester
             ]);
     }
 
-    public function update(Request $request) {
+    public function update(Request $request)
+    {
         // validasi
         $rules = [
-            'semester'  => 'required|max:100',
+            'semester' => 'required|max:100',
         ];
 
         $message = [
@@ -88,7 +92,7 @@ class SemesterController extends Controller
         }
 
         $semester = Semester::whereId($request->input('hidden_id'))->update([
-            'name'  => $request->input('semester'),
+            'name' => $request->input('semester'),
         ]);
 
         return response()
@@ -97,7 +101,8 @@ class SemesterController extends Controller
             ]);
     }
 
-    public function destroy($id) {
+    public function destroy($id)
+    {
         $semester = Semester::find($id);
         $semester->delete();
     }

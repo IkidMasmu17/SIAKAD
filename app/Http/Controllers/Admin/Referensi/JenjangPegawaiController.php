@@ -12,13 +12,14 @@ use Illuminate\Support\Facades\Auth;
 
 class JenjangPegawaiController extends Controller
 {
-    public function index(Request $request) {
+    public function index(Request $request)
+    {
         if ($request->ajax()) {
             $data = JenjangPegawai::latest()->get();
             return DataTables::of($data)
                 ->addColumn('action', function ($data) {
-                    $button = '<button type="button" id="'.$data->id.'" class="edit btn btn-mini btn-info shadow-sm">Edit</button>';
-                    $button .= '&nbsp;&nbsp;&nbsp;<button type="button" id="'.$data->id.'" class="delete btn btn-mini btn-danger shadow-sm">Delete</button>';
+                    $button = '<button type="button" id="' . $data->id . '" class="edit btn btn-primary px-3 py-1 text-sm shadow-sm rounded-md mr-1"><i class="fas fa-edit"></i> Edit</button>';
+                    $button .= '<button type="button" id="' . $data->id . '" class="delete btn btn-danger px-3 py-1 text-sm shadow-sm rounded-md"><i class="fas fa-trash"></i> Hapus</button>';
                     return $button;
                 })
                 ->rawColumns(['action'])
@@ -29,10 +30,11 @@ class JenjangPegawaiController extends Controller
         return view('admin.referensi.jenjang-pegawai', ['mySekolah' => User::sekolah()]);
     }
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         // validasi
         $rules = [
-            'jenjang'  => 'required|max:100',
+            'jenjang' => 'required|max:100',
         ];
 
         $message = [
@@ -49,7 +51,7 @@ class JenjangPegawaiController extends Controller
         }
 
         $status = JenjangPegawai::create([
-            'name'  => $request->input('jenjang'),
+            'name' => $request->input('jenjang'),
             'user_id' => Auth::id()
         ]);
 
@@ -59,19 +61,21 @@ class JenjangPegawaiController extends Controller
             ]);
     }
 
-    public function edit($id) {
+    public function edit($id)
+    {
         $jenjang = JenjangPegawai::find($id);
 
         return response()
             ->json([
-                'jenjang'  => $jenjang
+                'jenjang' => $jenjang
             ]);
     }
 
-    public function update(Request $request) {
+    public function update(Request $request)
+    {
         // validasi
         $rules = [
-            'jenjang'  => 'required|max:100',
+            'jenjang' => 'required|max:100',
         ];
 
         $message = [
@@ -88,7 +92,7 @@ class JenjangPegawaiController extends Controller
         }
 
         $status = JenjangPegawai::whereId($request->input('hidden_id'))->update([
-            'name'  => $request->input('jenjang'),
+            'name' => $request->input('jenjang'),
         ]);
 
         return response()
@@ -97,7 +101,8 @@ class JenjangPegawaiController extends Controller
             ]);
     }
 
-    public function destroy($id) {
+    public function destroy($id)
+    {
         $status = JenjangPegawai::find($id);
         $status->delete();
     }

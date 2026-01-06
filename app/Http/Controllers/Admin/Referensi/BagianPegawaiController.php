@@ -12,14 +12,15 @@ use Illuminate\Support\Facades\Auth;
 
 class BagianPegawaiController extends Controller
 {
-    public function index(Request $request) {
+    public function index(Request $request)
+    {
         $tes = User::get('id_sekolah');
         if ($request->ajax()) {
             $data = BagianPegawai::where('user_id', Auth::id())->latest()->get();
             return DataTables::of($data)
                 ->addColumn('action', function ($data) {
-                    $button = '<button type="button" id="'.$data->id.'" class="edit btn btn-mini btn-info shadow-sm">Edit</button>';
-                    $button .= '&nbsp;&nbsp;&nbsp;<button type="button" id="'.$data->id.'" class="delete btn btn-mini btn-danger shadow-sm">Delete</button>';
+                    $button = '<button type="button" id="' . $data->id . '" class="edit btn btn-primary px-3 py-1 text-sm shadow-sm rounded-md mr-1"><i class="fas fa-edit"></i> Edit</button>';
+                    $button .= '<button type="button" id="' . $data->id . '" class="delete btn btn-danger px-3 py-1 text-sm shadow-sm rounded-md"><i class="fas fa-trash"></i> Hapus</button>';
                     return $button;
                 })
                 ->rawColumns(['action'])
@@ -30,10 +31,11 @@ class BagianPegawaiController extends Controller
         return view('admin.referensi.bagian-pegawai', ['tes' => $tes, 'mySekolah' => User::sekolah()]);
     }
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         // validasi
         $rules = [
-            'pegawai'  => 'required|max:100',
+            'pegawai' => 'required|max:100',
         ];
 
         $message = [
@@ -50,7 +52,7 @@ class BagianPegawaiController extends Controller
         }
 
         $pegawai = BagianPegawai::create([
-            'name'  => $request->input('pegawai'),
+            'name' => $request->input('pegawai'),
             'user_id' => Auth::id()
         ]);
 
@@ -60,19 +62,21 @@ class BagianPegawaiController extends Controller
             ]);
     }
 
-    public function edit($id) {
+    public function edit($id)
+    {
         $pegawai = BagianPegawai::find($id);
 
         return response()
             ->json([
-                'pegawai'   => $pegawai
+                'pegawai' => $pegawai
             ]);
     }
 
-    public function update(Request $request) {
+    public function update(Request $request)
+    {
         // validasi
         $rules = [
-            'pegawai'  => 'required|max:100',
+            'pegawai' => 'required|max:100',
         ];
 
         $message = [
@@ -89,16 +93,17 @@ class BagianPegawaiController extends Controller
         }
 
         BagianPegawai::whereId($request->hidden_id)->update([
-            'name'  => $request->input('pegawai'),
+            'name' => $request->input('pegawai'),
         ]);
 
         return response()
             ->json([
-                'success'   => 'Data Updated.',
+                'success' => 'Data Updated.',
             ]);
     }
 
-    public function destroy($id) {
+    public function destroy($id)
+    {
         $pegawai = BagianPegawai::find($id);
         $pegawai->delete();
     }

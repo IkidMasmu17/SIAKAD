@@ -8,30 +8,33 @@ use Yajra\DataTables\DataTables;
 use App\Models\Admin\Posisi;
 use App\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class PosisiController extends Controller
 {
-    public function index(Request $request) {
+    public function index(Request $request)
+    {
         if ($request->ajax()) {
             $data = Posisi::latest()->get();
             return DataTables::of($data)
                 ->addColumn('action', function ($data) {
-                    $button = '<button type="button" id="'.$data->id.'" class="edit btn btn-mini btn-info shadow-sm">Edit</button>';
-                    $button .= '&nbsp;&nbsp;&nbsp;<button type="button" id="'.$data->id.'" class="delete btn btn-mini btn-danger shadow-sm">Delete</button>';
-                    return $button;
+                    $button = '<button type="button" id="' . $data->id . '" class="edit flex items-center px-3 py-1.5 bg-indigo-50 text-siakad-purple rounded-xl hover:bg-siakad-purple hover:text-white transition-all duration-200 font-bold text-xs"><i class="fas fa-edit mr-1.5"></i> Edit</button>';
+                    $button .= '&nbsp;&nbsp;<button type="button" id="' . $data->id . '" class="delete flex items-center px-3 py-1.5 bg-red-50 text-red-500 rounded-xl hover:bg-red-500 hover:text-white transition-all duration-200 font-bold text-xs"><i class="fas fa-trash-alt mr-1.5"></i> Hapus</button>';
+                    return '<div class="flex items-center space-x-2">' . $button . '</div>';
                 })
                 ->rawColumns(['action'])
                 ->addIndexColumn()
                 ->make(true);
         }
         $sekolahId = User::get('id_sekolah');
-        return view('admin.e-voting.posisi', ['sekolah_id' => $sekolahId ,'mySekolah' => User::sekolah()]);
+        return view('admin.e-voting.posisi', ['sekolah_id' => $sekolahId, 'mySekolah' => User::sekolah()]);
     }
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         // validasi
         $rules = [
-            'nama_posisi'  => 'required|max:50',
+            'nama_posisi' => 'required|max:50',
         ];
 
         $message = [
@@ -48,7 +51,7 @@ class PosisiController extends Controller
         }
 
         $status = Posisi::create([
-            'name'  => $request->input('nama_posisi'),
+            'name' => $request->input('nama_posisi'),
             'sekolah_id' => $request->input('sekolah_id')
         ]);
 
@@ -58,19 +61,21 @@ class PosisiController extends Controller
             ]);
     }
 
-    public function edit($id) {
+    public function edit($id)
+    {
         $nama_posisi = Posisi::find($id);
 
         return response()
             ->json([
-                'nama_posisi'  => $nama_posisi
+                'nama_posisi' => $nama_posisi
             ]);
     }
 
-    public function update(Request $request) {
+    public function update(Request $request)
+    {
         // validasi
         $rules = [
-            'nama_posisi'  => 'required|max:50',
+            'nama_posisi' => 'required|max:50',
         ];
 
         $message = [
@@ -87,7 +92,7 @@ class PosisiController extends Controller
         }
 
         $status = Posisi::whereId($request->input('hidden_id'))->update([
-            'name'  => $request->input('nama_posisi'),
+            'name' => $request->input('nama_posisi'),
         ]);
 
         return response()
@@ -96,7 +101,8 @@ class PosisiController extends Controller
             ]);
     }
 
-    public function destroy($id) {
+    public function destroy($id)
+    {
         $tingkat = Posisi::find($id);
         $tingkat->delete();
     }
