@@ -18,7 +18,7 @@
         {{-- [ Sidebar ] start --}}
         @include('components._sidebar')
 
-        <div class="flex-1 flex flex-col">
+        <div class="flex-1 flex flex-col md:ml-64 transition-all duration-300">
             {{-- [ Header ] start --}}
             @include('components._nav')
 
