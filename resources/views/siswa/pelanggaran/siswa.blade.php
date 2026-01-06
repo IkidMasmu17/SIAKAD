@@ -27,15 +27,15 @@
                             <table id="order-table" class="table table-striped table-bordered nowrap shadow-sm">
                                 <thead class="text-left">
                                     <tr>
-                                        <th width= 2%>No</th>
-                                        <th width= 34%>Pelanggaran</th>
-                                        <th width= 15%>Tanggal</th>
-                                        <th width= 15%>Point</th>
-                                        <th width= 34%>Sanksi</th>
+                                        <th width=2%>No</th>
+                                        <th width=34%>Pelanggaran</th>
+                                        <th width=15%>Tanggal</th>
+                                        <th width=15%>Point</th>
+                                        <th width=34%>Sanksi</th>
                                     </tr>
                                 </thead>
                                 <tbody class="text-left">
-                                    
+
                                 </tbody>
                             </table>
                         </div>
@@ -46,14 +46,16 @@
     </div>
 
     {{-- Modal --}}
-    @include('admin.pelanggaran.modals._siswa')
+    {{-- @include('admin.pelanggaran.modals._siswa') --}}
 @endsection
 
 {{-- addons css --}}
 @push('css')
-    <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset('bower_components/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/pages/data-table/css/buttons.dataTables.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}">
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset('bower_components/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/datedropper/css/datedropper.min.css') }}" />
     <style>
         .btn i {
