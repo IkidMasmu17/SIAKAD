@@ -5,7 +5,7 @@
             class="md:hidden text-siakad-purple p-2 hover:bg-siakad-bg rounded-lg transition-colors">
             <i class="fas fa-bars text-xl"></i>
         </button>
-        <div>
+        <div class="hidden md:block">
             <h2 class="text-xl font-bold text-siakad-purple tracking-tight">Halo, {{ Auth::user()->name }}!</h2>
             <p class="text-xs text-gray-400 font-medium uppercase tracking-wider">Selamat Datang di Portal Guru</p>
         </div>
