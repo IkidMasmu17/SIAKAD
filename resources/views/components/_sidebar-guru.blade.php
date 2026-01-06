@@ -3,7 +3,7 @@
     <div x-show="sidebarOpen" @click="sidebarOpen = false" x-transition.opacity
         class="fixed inset-0 bg-black/50 z-40 md:hidden"></div>
 
-    <nav class="fixed inset-y-0 left-0 z-50 w-64 bg-siakad-purple min-h-screen flex flex-col text-white shadow-xl transition-transform duration-300 md:relative md:translate-x-0 transform"
+    <nav class="fixed inset-y-0 left-0 z-50 w-64 bg-siakad-purple min-h-screen flex flex-col text-white shadow-xl transition-transform duration-300 md:sticky md:top-0 md:h-screen md:overflow-y-auto transform"
         :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'">
         <div class="p-6 flex flex-col items-center border-b border-siakad-light-purple/30">
             {{-- Ideally dynamic school info, for now static or minimal --}}
