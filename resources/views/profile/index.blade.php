@@ -24,7 +24,7 @@
         <div class="px-8 pb-8">
             <div class="relative flex flex-col items-center -mt-16 mb-6">
                 <div class="w-32 h-32 rounded-3xl overflow-hidden border-4 border-white shadow-xl bg-white">
-                    <img src="{{ asset('assets/images/user/avatar-1.jpg') }}" alt="Profile" class="w-full h-full object-cover">
+                    <img src="{{ asset('assets/images/avatar-4.jpg') }}" alt="Profile" class="w-full h-full object-cover">
                 </div>
                 <h3 class="mt-4 text-2xl font-bold text-siakad-purple text-center">{{ $user->name }}</h3>
                 <div class="flex items-center space-x-2 mt-2">

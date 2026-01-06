@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\User;
 
 class ProfileController extends Controller
 {
     public function index()
     {
         $user = Auth::user();
+        $mySekolah = User::sekolah();
 
         // Determine layout based on role
         if ($user->hasRole('admin')) {
@@ -26,6 +28,6 @@ class ProfileController extends Controller
             $layout = 'layouts.app';
         }
 
-        return view('profile.index', compact('user', 'layout'));
+        return view('profile.index', compact('user', 'layout', 'mySekolah'));
     }
 }
