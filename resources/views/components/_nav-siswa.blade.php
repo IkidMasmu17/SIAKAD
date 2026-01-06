@@ -75,7 +75,7 @@
             <div x-show="openDropdown === 'profile'" @click.away="openDropdown = null" x-cloak x-transition
                 class="absolute right-0 top-16 mt-2 w-48 bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden z-50 transition-all duration-200">
                 <div class="p-2">
-                    <a href="#!"
+                    <a href="{{ route('profile') }}"
                         class="flex items-center px-4 py-3 text-sm text-siakad-purple hover:bg-siakad-bg rounded-xl transition-colors">
                         <i class="fas fa-user mr-3 text-gray-400"></i> Profil Saya
                     </a>

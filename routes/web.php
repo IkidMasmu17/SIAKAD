@@ -505,6 +505,7 @@ Route::
     });
 
 Auth::routes();
+Route::get('/profile', 'ProfileController@index')->name('profile')->middleware('auth');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/test', 'TestController')->name('test');
 
