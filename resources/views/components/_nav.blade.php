@@ -1,5 +1,6 @@
 <header
-    class="h-20 bg-white border-b border-gray-100 flex items-center justify-between px-8 sticky top-0 z-30 shadow-sm">
+    class="h-20 bg-white border-b border-gray-100 flex items-center justify-between px-8 sticky top-0 z-30 shadow-sm"
+    x-data="{ openDropdown: null }">
     <div class="flex items-center space-x-4">
         <button id="mobile-collapse"
             class="lg:hidden text-siakad-purple p-2 hover:bg-siakad-bg rounded-lg transition-colors">
@@ -21,13 +22,13 @@
         </div>
 
         {{-- Notifications --}}
-        <div class="relative group" x-data="{ open: false }">
-            <button @click="open = !open"
+        <div class="relative">
+            <button @click="openDropdown = openDropdown === 'notification' ? null : 'notification'"
                 class="p-2 text-gray-400 hover:text-siakad-purple hover:bg-siakad-bg rounded-xl transition-all duration-300 relative">
                 <i class="icon-bell text-xl"></i>
                 <span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></span>
             </button>
-            <div x-show="open" @click.away="open = false" x-transition
+            <div x-show="openDropdown === 'notification'" @click.away="openDropdown = null" x-cloak x-transition
                 class="absolute right-0 mt-3 w-80 bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden z-50">
                 <div class="p-4 border-b border-gray-50 flex justify-between items-center bg-siakad-bg/30">
                     <span class="font-bold text-siakad-purple">Notifikasi</span>
@@ -55,24 +56,25 @@
         </div>
 
         {{-- Profile --}}
-        <div class="flex items-center space-x-4 pl-6 border-l border-gray-100" x-data="{ open: false }">
+        <div class="flex items-center space-x-4 pl-6 border-l border-gray-100 relative">
             <div class="text-right hidden sm:block leading-tight">
                 <p class="text-sm font-bold text-siakad-purple">{{ Auth::user()->name }}</p>
                 <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest">
-                    {{ Auth::user()->roles->first()->name ?? 'User' }}</p>
+                    {{ Auth::user()->roles->first()->name ?? 'User' }}
+                </p>
             </div>
-            <button @click="open = !open"
+            <button @click="openDropdown = openDropdown === 'profile' ? null : 'profile'"
                 class="flex items-center space-x-2 p-1 hover:bg-siakad-bg rounded-xl transition-all duration-300">
                 <div class="w-10 h-10 rounded-xl overflow-hidden border-2 border-white shadow-sm">
                     <img src="{{ asset('assets/images/avatar-4.jpg') }}" class="w-full h-full object-cover"
                         alt="User-Profile-Image">
                 </div>
                 <i class="feather icon-chevron-down text-gray-400 text-sm transition-transform duration-300"
-                    :class="{ 'rotate-180': open }"></i>
+                    :class="{ 'rotate-180': openDropdown === 'profile' }"></i>
             </button>
 
-            <div x-show="open" @click.away="open = false" x-transition
-                class="absolute right-8 top-16 mt-2 w-48 bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden z-50 transition-all duration-200">
+            <div x-show="openDropdown === 'profile'" @click.away="openDropdown = null" x-cloak x-transition
+                class="absolute right-0 top-16 mt-2 w-48 bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden z-50 transition-all duration-200">
                 <div class="p-2">
                     <a href="#!"
                         class="flex items-center px-4 py-3 text-sm text-siakad-purple hover:bg-siakad-bg rounded-xl transition-colors">

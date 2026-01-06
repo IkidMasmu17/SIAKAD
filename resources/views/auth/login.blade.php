@@ -1,176 +1,132 @@
 <!DOCTYPE html>
-<html lang="en">
-<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full">
 <head>
-    <title>Login</title>
-    {{-- Meta --}}
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    {{-- Favicon icon --}}
-    <link rel="icon" href="{{ asset('assets/images/favicon.ico') }}" type="image/x-icon">
-    {{-- Google font--}}     
-    <link href="{{ asset('fonts.googleapis.com/css0f7c.css?family=Open+Sans:300,400,600,700,800') }}" rel="stylesheet">
-    <link href="{{ asset('fonts.googleapis.com/css1180.css?family=Quicksand:500,700') }}" rel="stylesheet">
-    {{-- Required Framework --}}
-    <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/bootstrap/css/bootstrap.min.css') }}">
-    {{-- waves.css --}}
-    <link rel="stylesheet" href="{{ asset('assets/pages/waves/css/waves.min.css') }}" type="text/css" media="all">
-    {{-- feather icon --}}
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/icon/feather/css/feather.css') }}">
-    {{-- themify-icons line icon --}}
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/icon/themify-icons/themify-icons.css') }}">
-    {{-- ico font --}}
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/icon/icofont/css/icofont.css') }}">
-    {{-- Font Awesome --}}
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/icon/font-awesome/css/font-awesome.min.css') }}">
-    {{-- Style.css --}}
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/pages.css') }}">
+    <title>Login - {{ config('app.name', 'SIAKAD') }}</title>
 
+    {{-- Favicon --}}
+    <link rel="icon" href="{{ asset('assets/images/favicon.ico') }}" type="image/x-icon">
+
+    {{-- Fonts --}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    {{-- Styles --}}
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    {{-- Font Awesome --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        .bg-image {
-            background-image: url('{{ asset("img/bg-siswa.jpg") }}'); background-size: cover; background-position: top center; min-height:100% !important; height: 100%;
+        body {
+            font-family: 'Outfit', sans-serif;
+        }
+        .bg-pattern {
+            background-color: #2d2463;
+            background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.05) 1px, transparent 0);
+            background-size: 40px 40px;
         }
     </style>
-  </head>
+</head>
 
-  <body class="bg-image">
-  {{-- Pre-loader start --}}
-  <div class="theme-loader">
-      <div class="loader-track">
-          <div class="preloader-wrapper">
-              <div class="spinner-layer spinner-blue">
-                  <div class="circle-clipper left">
-                      <div class="circle"></div>
-                  </div>
-                  <div class="gap-patch">
-                      <div class="circle"></div>
-                  </div>
-                  <div class="circle-clipper right">
-                      <div class="circle"></div>
-                  </div>
-              </div>
-              <div class="spinner-layer spinner-red">
-                  <div class="circle-clipper left">
-                      <div class="circle"></div>
-                  </div>
-                  <div class="gap-patch">
-                      <div class="circle"></div>
-                  </div>
-                  <div class="circle-clipper right">
-                      <div class="circle"></div>
-                  </div>
-              </div>
-            
-              <div class="spinner-layer spinner-yellow">
-                  <div class="circle-clipper left">
-                      <div class="circle"></div>
-                  </div>
-                  <div class="gap-patch">
-                      <div class="circle"></div>
-                  </div>
-                  <div class="circle-clipper right">
-                      <div class="circle"></div>
-                  </div>
-              </div>
-            
-              <div class="spinner-layer spinner-green">
-                  <div class="circle-clipper left">
-                      <div class="circle"></div>
-                  </div>
-                  <div class="gap-patch">
-                      <div class="circle"></div>
-                  </div>
-                  <div class="circle-clipper right">
-                      <div class="circle"></div>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
-  {{-- Pre-loader end --}}
-    <section class="login-block mt-5">
-        {{-- Container-fluid starts --}}
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-sm-12">
-                    {{-- Authentication card start --}}
-                    <form class="md-float-material form-material" method="POST" action="{{ route('login') }}">
-                    @csrf
-                        <div class="text-center">
-                            <img src="{{ asset('img/logo-putih.png') }}" alt="logo-literasia.png" width="150">
-                        </div>
-                        <div class="auth-box card shadow">
-                            <div class="card-block">
-                                <div class="row m-b-20">
-                                    <div class="col-md-12">
-                                        <h3 class="text-center txt-primary">{{ __('Login') }}</h3>
-                                    </div>
-                                </div>
-                                <p class="text-muted text-center p-b-5">{{ __('Login') }} with your regular account</p>
-                                <div class="form-group form-primary">
-                                    <input type="text" name="username" class="form-control" required="">
-                                    <span class="form-bar"></span>
-                                    <label class="float-label">{{ __('Username') }}</label>
-                                </div>
-                                <div class="form-group form-primary">
-                                    <input type="password" name="password" class="form-control" required="">
-                                    <span class="form-bar"></span>
-                                    <label class="float-label">{{ __('Password') }}</label>
-                                </div>
-                                <div class="row m-t-25 text-left">
-                                    <div class="col-12">
-                                        <div class="checkbox-fade fade-in-primary">
-                                            <label>
-                                                <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-                                                <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span>
-                                                <span for="remember" class="text-inverse">{{ __('Remember Me') }}</span>
-                                            </label>
-                                        </div>
-                                        <div class="forgot-phone text-right float-right">
-                                            @if (Route::has('password.request'))
-                                                <a href="{{ route('password.request') }}" class="text-right f-w-600"> {{ __('Forgot Password?') }}</a>
-                                            @endif
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row m-t-30">
-                                    <div class="col-md-12">
-                                        <button type="submit" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20">LOGIN</button>
-                                    </div>
-                                </div>
-                                {{-- <p class="text-inverse text-left">Don't have an account?<a href="auth-sign-up-social.html"> <b>Register here </b></a>for free!</p> --}}
-                            </div>
-                        </div>
-                    </form>
-                        {{-- end of form --}}
-                    </div>
-                    {{-- Authentication card end --}}
-                </div>
-                {{-- end of col-sm-12 --}}
-            </div>
-            {{-- end of row --}}
+<body class="h-full bg-pattern flex items-center justify-center p-4">
+    <div class="max-w-md w-full">
+        <!-- Logo Section -->
+        <div class="text-center mb-8 animate-fade-in-down">
+            <img src="{{ asset('img/logo-putih.png') }}" alt="Logo" class="h-20 mx-auto mb-4 drop-shadow-xl">
+            <h2 class="text-white text-3xl font-bold tracking-tight">SIAKAD Sekolah</h2>
+            <p class="text-indigo-200 mt-2">Sistem Informasi Akademik Terintegrasi</p>
         </div>
-        {{-- end of container-fluid --}}
-    </section>
 
-    {{-- Warning Section Ends --}}
-    {{-- Required Jquery --}}
-    <script type="text/javascript" src="{{ asset('bower_components/jquery/js/jquery.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('bower_components/jquery-ui/js/jquery-ui.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('bower_components/popper.js/js/popper.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('bower_components/bootstrap/js/bootstrap.min.js') }}"></script>
-    {{-- waves js --}}
-    <script src="{{ asset('assets/pages/waves/js/waves.min.js') }}"></script>
-    {{-- jquery slimscroll js --}}
-    <script type="text/javascript" src="{{ asset('bower_components/jquery-slimscroll/js/jquery.slimscroll.js') }}"></script>
-    {{-- modernizr js --}}
-    <script type="text/javascript" src="{{ asset('bower_components/modernizr/js/modernizr.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('bower_components/modernizr/js/css-scrollbars.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/js/common-pages.js') }}"></script>
+        <!-- Login Card -->
+        <div class="bg-white rounded-3xl shadow-2xl overflow-hidden animate-fade-in">
+            <div class="p-8 sm:p-10">
+                <div class="mb-8">
+                    <h3 class="text-2xl font-bold text-gray-900 border-l-4 border-siakad-purple pl-4">Login</h3>
+                    <p class="text-gray-500 mt-2 ml-5 text-sm uppercase tracking-wider font-semibold">Selamat Datang!</p>
+                </div>
+
+                <form method="POST" action="{{ route('login') }}" class="space-y-6">
+                    @csrf
+
+                    <!-- Username -->
+                    <div>
+                        <label for="username" class="block text-xs font-bold text-gray-700 uppercase tracking-widest mb-2 ml-1">Username</label>
+                        <div class="relative group">
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400 group-focus-within:text-siakad-purple transition-colors">
+                                <i class="fa-solid fa-user text-sm"></i>
+                            </div>
+                            <input type="text" name="username" id="username" required 
+                                class="block w-full pl-11 pr-4 py-3.5 bg-gray-50 border border-gray-200 text-gray-900 text-sm rounded-xl focus:ring-2 focus:ring-siakad-purple focus:border-siakad-purple transition-all outline-none" 
+                                placeholder="Masukkan username Anda" value="{{ old('username') }}">
+                        </div>
+                        @error('username')
+                            <p class="mt-1.5 text-xs text-red-600 font-medium ml-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <!-- Password -->
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <label for="password" class="block text-xs font-bold text-gray-700 uppercase tracking-widest ml-1">Kata Sandi</label>
+                            @if (Route::has('password.request'))
+                                <a href="{{ route('password.request') }}" class="text-xs font-bold text-siakad-purple hover:text-indigo-800 transition-colors">Lupa Sandi?</a>
+                            @endif
+                        </div>
+                        <div class="relative group">
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400 group-focus-within:text-siakad-purple transition-colors">
+                                <i class="fa-solid fa-lock text-sm"></i>
+                            </div>
+                            <input type="password" name="password" id="password" required 
+                                class="block w-full pl-11 pr-4 py-3.5 bg-gray-50 border border-gray-200 text-gray-900 text-sm rounded-xl focus:ring-2 focus:ring-siakad-purple focus:border-siakad-purple transition-all outline-none" 
+                                placeholder="••••••••">
+                        </div>
+                        @error('password')
+                            <p class="mt-1.5 text-xs text-red-600 font-medium ml-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <!-- Remember Me -->
+                    <div class="flex items-center ml-1">
+                        <input id="remember" name="remember" type="checkbox" {{ old('remember') ? 'checked' : '' }}
+                            class="h-4 w-4 text-siakad-purple focus:ring-siakad-purple border-gray-300 rounded transition-all cursor-pointer">
+                        <label for="remember" class="ml-2 block text-sm text-gray-600 cursor-pointer">Ingat saya untuk sesi berikutnya</label>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" 
+                        class="w-full py-4 px-6 bg-siakad-purple hover:bg-indigo-800 text-white font-bold rounded-xl shadow-lg shadow-indigo-200 hover:shadow-indigo-300 transition-all transform hover:-translate-y-0.5 active:translate-y-0">
+                        Masuk Ke Akun
+                        <i class="fa-solid fa-arrow-right-to-bracket ml-2"></i>
+                    </button>
+                    
+                    @if(session('error'))
+                        <div class="p-3 rounded-xl bg-red-50 border border-red-100 flex items-center text-red-700 text-xs font-medium">
+                            <i class="fa-solid fa-circle-exclamation mr-2"></i>
+                            {{ session('error') }}
+                        </div>
+                    @endif
+                </form>
+            </div>
+
+            <!-- Footer Section -->
+            <div class="bg-gray-50 p-6 text-center border-t border-gray-100">
+                <p class="text-sm text-gray-600">
+                    &copy; {{ date('Y') }} SIAKAD Sekolah. Seluruh hak cipta dilindungi.
+                </p>
+            </div>
+        </div>
+        
+        <!-- Quick Help -->
+        <div class="text-center mt-8 space-x-6">
+            <a href="#" class="text-xs font-bold text-indigo-200 hover:text-white transition-colors underline decoration-indigo-500 underline-offset-4">Butuh Bantuan?</a>
+            <a href="#" class="text-xs font-bold text-indigo-200 hover:text-white transition-colors underline decoration-indigo-500 underline-offset-4">Panduan Pengguna</a>
+        </div>
+    </div>
 </body>
 </html>

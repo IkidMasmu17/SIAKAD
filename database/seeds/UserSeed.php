@@ -17,34 +17,43 @@ class UserSeed extends Seeder
         User::truncate();
         DB::table('role_user')->truncate();
 
-        $superadmin = Role::where('name', 'superadmin')->first();
-        $admin = Role::where('name', 'admin')->first();
-        $siswa = Role::where('name', 'siswa')->first();
+        $superadminRole = Role::where('name', 'superadmin')->first();
+        $adminRole = Role::where('name', 'admin')->first();
+        $siswaRole = Role::where('name', 'siswa')->first();
+        $guruRole = Role::where('name', 'guru')->first();
 
-        $superadmins = User::create([
-            'name'      => 'Superadmin',
-            'username'  => 'superadmin',
-            'password'  => bcrypt('superadmin'),
-            'role_id'   => 1
+        $superadmin = User::create([
+            'name' => 'Superadmin',
+            'username' => 'superadmin',
+            'password' => bcrypt('admin123'),
+            'role_id' => $superadminRole->id
         ]);
 
-        $admins = User::create([
-            'name'      => 'Admin',
-            'username'  => 'admin',
-            'password'  => bcrypt('admin'),
-            'role_id'   => 2
+        $admin = User::create([
+            'name' => 'Admin Sekolah',
+            'username' => 'admin',
+            'password' => bcrypt('admin123'),
+            'role_id' => $adminRole->id
         ]);
 
-        $siswas = User::create([
-            'name'      => 'Siswa',
-            'username'  => 'siswa',
-            'password'  => bcrypt('siswa'),
-            'role_id'   => '3'
+        $siswa = User::create([
+            'name' => 'Siswa Dummy',
+            'username' => 'siswa',
+            'password' => bcrypt('admin123'),
+            'role_id' => $siswaRole->id
         ]);
 
+        $guru = User::create([
+            'name' => 'Guru Dummy',
+            'username' => 'guru',
+            'password' => bcrypt('admin123'),
+            'role_id' => $guruRole->id
+        ]);
 
-        $superadmins->roles()->attach($superadmin);
-        $admins->roles()->attach($admin);
-        $siswas->roles()->attach($siswa);
+        $superadmin->roles()->attach($superadminRole);
+        $admin->roles()->attach($adminRole);
+        $siswa->roles()->attach($siswaRole);
+        $guru->roles()->attach($guruRole);
     }
 }
+

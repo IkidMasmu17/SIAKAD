@@ -13,12 +13,14 @@ class AlterJadwalPelajaranKelas extends Migration
      */
     public function up()
     {
-        DB::transaction(function(){
-            DB::table('jadwal_pelajarans')->truncate();
-            Schema::table('jadwal_pelajarans', function(Blueprint $table){
+        Schema::table('jadwal_pelajarans', function (Blueprint $table) {
+            if (!Schema::hasColumn('jadwal_pelajarans', 'kelas_id')) {
+                DB::table('jadwal_pelajarans')->truncate();
                 $table->unsignedBigInteger('kelas_id');
+            }
+            if (Schema::hasColumn('jadwal_pelajarans', 'kelas')) {
                 $table->dropColumn('kelas');
-            });
+            }
         });
     }
 
@@ -29,6 +31,6 @@ class AlterJadwalPelajaranKelas extends Migration
      */
     public function down()
     {
-        
+
     }
 }
