@@ -1,10 +1,9 @@
 <header
-    class="h-20 bg-white border-b border-gray-100 flex items-center justify-between px-8 sticky top-0 z-30 shadow-sm"
-    x-data="{ openDropdown: null }">
+    class="h-20 bg-white border-b border-gray-100 flex items-center justify-between px-8 sticky top-0 z-30 shadow-sm">
     <div class="flex items-center space-x-4">
         <button @click="sidebarOpen = !sidebarOpen"
             class="md:hidden text-siakad-purple p-2 hover:bg-siakad-bg rounded-lg transition-colors">
-            <i class="feather icon-menu text-xl"></i>
+            <i class="fas fa-bars text-xl"></i>
         </button>
         <div>
             <h2 class="text-xl font-bold text-siakad-purple tracking-tight">Halo, {{ Auth::user()->name }}!</h2>

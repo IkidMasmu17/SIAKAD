@@ -15,75 +15,79 @@
 @section('content')
     <div class="space-y-8">
         {{-- Main Stats Grid --}}
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
             {{-- Total Siswa Card --}}
             <div
-                class="bg-white p-6 rounded-3xl shadow-sm border border-gray-50 flex items-center justify-between group hover:shadow-xl transition-all duration-300">
-                <div>
-                    <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Total Siswa</p>
-                    <div class="flex items-baseline space-x-2">
-                        <h3 class="text-3xl font-extrabold text-siakad-purple tracking-tight">532</h3>
-                        <span class="text-xs font-bold text-green-500 bg-green-50 px-2 py-0.5 rounded-full">+1.6%</span>
+                class="bg-white p-4 md:p-6 rounded-3xl shadow-sm border border-gray-50 flex flex-col-reverse md:flex-row md:items-center justify-between group hover:shadow-xl transition-all duration-300">
+                <div class="mt-4 md:mt-0">
+                    <p class="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Total Siswa</p>
+                    <div class="flex flex-wrap items-baseline gap-1 md:space-x-2">
+                        <h3 class="text-2xl md:text-3xl font-extrabold text-siakad-purple tracking-tight">532</h3>
+                        <span
+                            class="text-[10px] md:text-xs font-bold text-green-500 bg-green-50 px-2 py-0.5 rounded-full">+1.6%</span>
                     </div>
                 </div>
                 <div
-                    class="w-14 h-14 bg-siakad-bg rounded-2xl flex items-center justify-center group-hover:bg-siakad-purple group-hover:text-white transition-colors">
-                    <i class="fas fa-user-graduate text-xl"></i>
+                    class="w-10 h-10 md:w-14 md:h-14 bg-siakad-bg rounded-2xl flex items-center justify-center group-hover:bg-siakad-purple group-hover:text-white transition-colors self-start md:self-auto">
+                    <i class="fas fa-user-graduate text-base md:text-xl"></i>
                 </div>
             </div>
 
             {{-- Total Guru Card --}}
             <div
-                class="bg-white p-6 rounded-3xl shadow-sm border border-gray-50 flex items-center justify-between group hover:shadow-xl transition-all duration-300">
-                <div>
-                    <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Total Guru</p>
-                    <div class="flex items-baseline space-x-2">
-                        <h3 class="text-3xl font-extrabold text-siakad-purple tracking-tight">456</h3>
-                        <span class="text-xs font-bold text-red-500 bg-red-50 px-2 py-0.5 rounded-full">-0.5%</span>
+                class="bg-white p-4 md:p-6 rounded-3xl shadow-sm border border-gray-50 flex flex-col-reverse md:flex-row md:items-center justify-between group hover:shadow-xl transition-all duration-300">
+                <div class="mt-4 md:mt-0">
+                    <p class="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Total Guru</p>
+                    <div class="flex flex-wrap items-baseline gap-1 md:space-x-2">
+                        <h3 class="text-2xl md:text-3xl font-extrabold text-siakad-purple tracking-tight">456</h3>
+                        <span
+                            class="text-[10px] md:text-xs font-bold text-red-500 bg-red-50 px-2 py-0.5 rounded-full">-0.5%</span>
                     </div>
                 </div>
                 <div
-                    class="w-14 h-14 bg-siakad-bg rounded-2xl flex items-center justify-center group-hover:bg-siakad-purple group-hover:text-white transition-colors">
-                    <i class="fas fa-chalkboard-teacher text-xl"></i>
+                    class="w-10 h-10 md:w-14 md:h-14 bg-siakad-bg rounded-2xl flex items-center justify-center group-hover:bg-siakad-purple group-hover:text-white transition-colors self-start md:self-auto">
+                    <i class="fas fa-chalkboard-teacher text-base md:text-xl"></i>
                 </div>
             </div>
 
             {{-- Sekolah Card --}}
             <div
-                class="bg-white p-6 rounded-3xl shadow-sm border border-gray-50 flex items-center justify-between group hover:shadow-xl transition-all duration-300">
-                <div>
-                    <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Sekolah</p>
-                    <div class="flex items-baseline space-x-2">
-                        <h3 class="text-3xl font-extrabold text-siakad-purple tracking-tight">89%</h3>
-                        <span class="text-xs font-bold text-green-500 bg-green-50 px-2 py-0.5 rounded-full">+0.9%</span>
+                class="bg-white p-4 md:p-6 rounded-3xl shadow-sm border border-gray-50 flex flex-col-reverse md:flex-row md:items-center justify-between group hover:shadow-xl transition-all duration-300">
+                <div class="mt-4 md:mt-0">
+                    <p class="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Sekolah</p>
+                    <div class="flex flex-wrap items-baseline gap-1 md:space-x-2">
+                        <h3 class="text-2xl md:text-3xl font-extrabold text-siakad-purple tracking-tight">89%</h3>
+                        <span
+                            class="text-[10px] md:text-xs font-bold text-green-500 bg-green-50 px-2 py-0.5 rounded-full">+0.9%</span>
                     </div>
                 </div>
                 <div
-                    class="w-14 h-14 bg-siakad-bg rounded-2xl flex items-center justify-center group-hover:bg-siakad-purple group-hover:text-white transition-colors">
-                    <i class="fas fa-school text-xl"></i>
+                    class="w-10 h-10 md:w-14 md:h-14 bg-siakad-bg rounded-2xl flex items-center justify-center group-hover:bg-siakad-purple group-hover:text-white transition-colors self-start md:self-auto">
+                    <i class="fas fa-school text-base md:text-xl"></i>
                 </div>
             </div>
 
             {{-- Kota Card --}}
             <div
-                class="bg-white p-6 rounded-3xl shadow-sm border border-gray-50 flex items-center justify-between group hover:shadow-xl transition-all duration-300">
-                <div>
-                    <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Kota/Kab</p>
-                    <div class="flex items-baseline space-x-2">
-                        <h3 class="text-3xl font-extrabold text-siakad-purple tracking-tight">365</h3>
-                        <span class="text-xs font-bold text-green-500 bg-green-50 px-2 py-0.5 rounded-full">+0.3%</span>
+                class="bg-white p-4 md:p-6 rounded-3xl shadow-sm border border-gray-50 flex flex-col-reverse md:flex-row md:items-center justify-between group hover:shadow-xl transition-all duration-300">
+                <div class="mt-4 md:mt-0">
+                    <p class="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Kota/Kab</p>
+                    <div class="flex flex-wrap items-baseline gap-1 md:space-x-2">
+                        <h3 class="text-2xl md:text-3xl font-extrabold text-siakad-purple tracking-tight">365</h3>
+                        <span
+                            class="text-[10px] md:text-xs font-bold text-green-500 bg-green-50 px-2 py-0.5 rounded-full">+0.3%</span>
                     </div>
                 </div>
                 <div
-                    class="w-14 h-14 bg-siakad-bg rounded-2xl flex items-center justify-center group-hover:bg-siakad-purple group-hover:text-white transition-colors">
-                    <i class="fas fa-map-marker-alt text-xl"></i>
+                    class="w-10 h-10 md:w-14 md:h-14 bg-siakad-bg rounded-2xl flex items-center justify-center group-hover:bg-siakad-purple group-hover:text-white transition-colors self-start md:self-auto">
+                    <i class="fas fa-map-marker-alt text-base md:text-xl"></i>
                 </div>
             </div>
         </div>
 
         {{-- Chart and Secondary Stats --}}
         <div class="grid grid-cols-1 xl:grid-cols-3 gap-8">
-            <div class="xl:col-span-2 bg-white p-8 rounded-3xl shadow-sm border border-gray-50">
+            <div class="xl:col-span-2 bg-white p-5 md:p-8 rounded-3xl shadow-sm border border-gray-50">
                 <div class="flex items-center justify-between mb-8">
                     <div>
                         <h3 class="text-xl font-bold text-siakad-purple leading-tight">Grafik Analitik</h3>
@@ -145,7 +149,7 @@
         {{-- Schools Table --}}
         <div class="bg-white rounded-3xl shadow-sm border border-gray-50 overflow-hidden">
             <div
-                class="p-8 border-b border-gray-50 flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
+                class="p-5 md:p-8 border-b border-gray-50 flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
                 <div>
                     <h3 class="text-xl font-bold text-siakad-purple leading-tight">Daftar Sekolah Terdaftar</h3>
                     <p class="text-sm text-gray-400 font-medium">Kelola dan lihat ringkasan data sekolah</p>

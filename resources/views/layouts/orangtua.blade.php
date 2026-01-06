@@ -13,7 +13,7 @@
 </head>
 
 <body class="bg-siakad-bg">
-    <div id="app" class="flex min-h-screen" x-data="{ sidebarOpen: false }">
+    <div id="app" class="flex min-h-screen" x-data="{ sidebarOpen: false, openDropdown: null }">
         {{-- [ Sidebar ] start --}}
         @include('components._sidebar-orangtua')
 
